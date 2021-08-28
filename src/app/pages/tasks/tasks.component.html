@@ -1,0 +1,84 @@
+<div class="crear-tarea">
+
+    <div class="container container-fluid crear-tarea__container">
+        <h2 class="bold"><i class="fas fa-plus"></i> Nueva tarea</h2>
+        <h3 class="mt-3"> Titulo </h3>
+        <form action="" class="formulario">
+            <input type="text" class="input-titulo" placeholder="Ingrese titulo...">
+            <div class="form-check mt-2">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Tarea completada
+                </label>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            </div>
+            <button class="btn btn-light medium"><i class="fas fa-plus "></i> GUARDAR TAREA</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="lista-de-tareas container mt-5">
+    <div class="busqueda">
+        <h1><i class="fas fa-list"></i> Lista de tareas</h1>
+            
+                <form class="busqueda__caja">
+                    <input class="busqueda__input" type="text" placeholder="Buscar...">
+                </form>
+           
+    </div>
+
+    <div class="mostrar-tareas mt-3">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                              <th class="col-sm-1">Id</th>
+                              <th class="col-sm-7">Mis Tareas</th>
+                              <th class="col-sm-2">Completadas</th>
+                              <th class="col-sm-2">Borrar</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th >1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td class="text-danger"><i class="fas fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                              <th >2</th>
+                              <td>Jacob</td>
+                              <td>Thornton</td>
+                              <td class="text-danger"><i class="fas fa-trash-alt"></i></td>
+                            </tr>
+                          </tbody>
+                    </table>
+                  </div>
+            </div>
+          </div>
+
+    </div>
+
+</div>
+
+
+<div class="paginacion mt-5">
+    <div class="wrapper">
+        <div class="pagination">
+          <a class="prev" href="#"><span><i class="fas fa-angle-left"></i></span></a>
+          <a class="page" href="#"><span>1</span></a>
+          <a class="page" href="#"><span>2</span></a>
+          <a class="page active" href="#"><span>3</span></a>
+          <a class="page" href="#"><span>4</span></a>
+          <!-- <a class="page ellipsis" href="#"><span>...</span></a> -->
+          <a class="next" href="#"><span><i class="fas fa-angle-right"></i></span></a>
+        </div>
+      </div>
+</div>
+
+

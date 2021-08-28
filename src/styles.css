@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+/* ROBOTO medium - 500 - bold 700 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+
+body{
+    font-family: 'Roboto';
+}
+
+h1,h2,h3,h4{
+    font-weight: normal;
+}
+
+h1{
+    font-size: 26px;
+}
+
+h2, th{
+    font-size: 20px;
+}
+
+h3{
+    font-size: 16px;
+}
+
+p{
+    font-size: 12px;
+}
+
+.bold{
+    font-weight: 700;
+}
+
+.medium{
+    font-weight: 500;
+}
