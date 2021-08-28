@@ -21,11 +21,16 @@
 }
 
 .btn {
+  margin-top: 10px;
   width: 100%;
   border-radius: 50px;
   font-size: 14px;
   letter-spacing: 1.25px;
   
+}
+
+a{
+  cursor: pointer;
 }
 
 .lista-de-tareas {
@@ -103,6 +108,26 @@ tr {
   color: #3db0e3;
 }
 
+/* checkbox */
+
+
+input[type="checkbox"]{
+  appearance: none;
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  background-color: #d0d0d0;
+  border-radius: 3px;
+  cursor: pointer;
+ 
+}
+
+input[type="checkbox"]:checked{
+  background-color: #11766a;
+  border-color: #11766a;
+}
+
+
 @media (min-width: 780px) {
   .formulario {
     display: flex;
@@ -112,6 +137,7 @@ tr {
     width: initial;
     height: 48px;
     width: 193px;
+    margin-top: 0;
   }
   .input-titulo {
     width: 50%;

@@ -1,0 +1,47 @@
+
+button.wh-ap-btn {
+	outline: none;
+    width:  60px;
+    height:  60px;
+    border:  0;
+    background-color: #d579ec;
+    padding:  0;
+    border-radius:  100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    cursor:  pointer;
+    transition:  opacity 0.3s, background 0.3s, box-shadow 0.3s;
+}
+
+button.wh-ap-btn::after {
+    content: '';
+    background-image: url('../../../assets/GITHUB.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 48%;
+    width:  100%;
+    height:  100%;
+    display:  block;
+    opacity: 1;
+}
+
+button.wh-ap-btn:hover {
+    opacity:  1;
+    background-color: #000;
+}
+
+.wh-api {
+    position:  fixed;
+    bottom:  0;
+    right:  0;
+}
+
+.wh-fixed {
+    margin-right:  50px;
+    margin-bottom:  15px;
+}
+
+.wh-fixed>a {
+    display:  block;
+    text-decoration:  none;
+}
+
