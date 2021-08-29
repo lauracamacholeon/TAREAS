@@ -17,12 +17,15 @@ export class TasksComponent implements OnInit {
 
   // recibir numero por output
   paginacion = 0;
+  mensaje = 'hola';
 
   // Banderas
   tareaCreada = false;
   tareaActualizada = false;
+  tareaEliminada = false;
 
   tareaFormulario: Tarea = { title: '', state: '' };
+  mensajeError = '';
 
   constructor(private servicioTareas: TasksService) {}
 
@@ -35,15 +38,26 @@ export class TasksComponent implements OnInit {
   }
 
   obtenerTareas() {
-    this.servicioTareas.obtenerTareas().subscribe((data) => {
-      this.tareas = data;
-      this.tamanoDataTareas = this.tareas.length;
-    });
+    this.servicioTareas.obtenerTareas().subscribe(
+      (data) => {
+        this.tareas = data;
+        this.tamanoDataTareas = this.tareas.length;
+      },
+      (error) => {
+        this.mensajeError = error;
+        this.alertaError();
+      }
+    );
   }
 
   crearTarea() {
-    this.tareaCreada = true;
-    this.servicioTareas.crearTarea(this.tareaFormulario).subscribe();
+    this.servicioTareas.crearTarea(this.tareaFormulario).subscribe(
+      (resp) => (this.tareaCreada = true),
+      (error) => {
+        this.mensajeError = error;
+        this.alertaError();
+      }
+    );
   }
 
   guardarTarea(formulario: NgForm) {
@@ -68,8 +82,13 @@ export class TasksComponent implements OnInit {
   }
 
   actualizarTarea(informacion: Tarea) {
-    this.tareaActualizada = true;
-    this.servicioTareas.actualizarTarea(informacion).subscribe();
+    this.servicioTareas.actualizarTarea(informacion).subscribe(
+      (data) => (this.tareaActualizada = true),
+      (error) => {
+        this.mensajeError = error;
+        this.alertaError();
+      }
+    );
   }
 
   datosElementoAmodificar(tarea: Tarea) {
@@ -89,11 +108,17 @@ export class TasksComponent implements OnInit {
       cancelButtonColor: '#d9534f',
       confirmButtonColor: '#11806A',
       confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
       // si la respuesta es OK, se eliminará el elemento (evitar accidentes)
     }).then((resp) => {
       if (resp.value) {
-        this.servicioTareas.eliminarTarea(id).subscribe();
+        this.servicioTareas.eliminarTarea(id).subscribe(
+          resp => this.tareaEliminada = true,
+          error => {
+            this.mensajeError = error;
+            this.alertaError();
+          }
+        );
       }
     });
   }
@@ -101,6 +126,15 @@ export class TasksComponent implements OnInit {
   limpiarFormulario() {
     this.tareaCreada = false;
     this.tareaActualizada = false;
+    this.tareaEliminada = false;
     this.tareaFormulario = { title: '', state: '' };
+  }
+
+  alertaError() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Ha ocurrido un error',
+    });
   }
 }

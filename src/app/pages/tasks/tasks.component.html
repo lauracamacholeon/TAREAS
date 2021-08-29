@@ -1,9 +1,12 @@
 <!-- alertas -->
-<div *ngIf="tareaCreada" >
+<div *ngIf="tareaCreada">
   <app-alert (alertaCerrada)="limpiarFormulario()" [color]="'alert-success'" [texto]="'creada'"></app-alert>
 </div>
-<div *ngIf="tareaActualizada" >
+<div *ngIf="tareaActualizada">
   <app-alert (alertaCerrada)="limpiarFormulario()" [color]="'alert-warning'" [texto]="'actualizada'"></app-alert>
+</div>
+<div *ngIf="tareaEliminada">
+  <app-alert (alertaCerrada)="limpiarFormulario()" [color]="'alert-danger'" [texto]="'eliminada'"></app-alert>
 </div>
 
 
@@ -31,6 +34,7 @@
 
 </div>
 
+
 <!-- mostrar tabla -->
 <div class="lista-de-tareas container mt-5">
   <div class="busqueda">
@@ -44,9 +48,11 @@
 
   <div class="mostrar-tareas mt-3">
 
+
     <div class="card">
       <div class="card-body">
         <div class="table-responsive">
+
           <table class="table table-borderless">
             <thead>
               <tr>
@@ -59,15 +65,19 @@
             <tbody>
               <tr *ngFor="let tarea of tareas | pagination:paginacion | search:busqueda">
                 <th (click)="datosElementoAmodificar(tarea)" class="editar-tarea">{{ tarea.id }}</th>
-                <td (click)="datosElementoAmodificar(tarea)" class="editar-tarea" [ngClass]="{'tareaRealizada': tarea.state}"> {{ tarea.title }}</td>
+                <td (click)="datosElementoAmodificar(tarea)" class="editar-tarea"
+                  [ngClass]="{'tareaRealizada': tarea.state}"> {{ tarea.title }}</td>
                 <td>
-                  <input  (click)="actualizarCheck($event.target,tarea)"  [ngModel]="tarea.state" readonly  class="form-check-input" type="checkbox" value=""
-                    id="flexCheckDefault">
+                  <input (click)="actualizarCheck($event.target,tarea)" [ngModel]="tarea.state" readonly
+                    class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 </td>
-                <td (click)="eliminarTarea(tarea.id)" class="text-danger editar-tarea"><i class="fas fa-trash-alt"></i></td>
+                <td (click)="eliminarTarea(tarea.id)" class="text-danger editar-tarea"><i class="fas fa-trash-alt"></i>
+                </td>
               </tr>
             </tbody>
           </table>
+          <h2 class="text-center mt-5"> {{ mensajeError }}</h2>
+
         </div>
       </div>
     </div>
@@ -77,5 +87,4 @@
 </div>
 
 <!-- paginar -->
-<app-pagination [tamanoData]="tamanoDataTareas"  (mostrarPaginas)="paginacion = $event"></app-pagination>
-
+<app-pagination [tamanoData]="tamanoDataTareas" (mostrarPaginas)="paginacion = $event"></app-pagination>
