@@ -10,6 +10,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class AlertComponent implements OnInit {
 
   @Input() color: string = '';
+  @Input() texto: string = '';
   @Output() alertaCerrada:EventEmitter<boolean> = new EventEmitter();
 
 

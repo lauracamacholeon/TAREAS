@@ -10,23 +10,23 @@ import { NgForm } from '@angular/forms';
 })
 export class TasksComponent implements OnInit {
   tareas: TareaRespuesta[] = [];
+  tamanoDataTareas: number = 0;
   busqueda = '';
   pagina: number = 1;
+
+  // recibir numero por output
   paginacion = 0;
 
   // Banderas
   tareaCreada = false;
+  tareaActualizada = false;
 
-  tareaFormulario: Tarea = {
-    title: '',
-    state: '',
-  };
+  tareaFormulario: Tarea = {  title: '',  state: '' };
 
   constructor(private servicioTareas: TasksService) {}
 
   ngOnInit(): void {
     this.obtenerTareas();
-
     // visualizacion en tiempo real
     this.servicioTareas.refrescar$.subscribe(() => {
       this.obtenerTareas();
@@ -36,7 +36,13 @@ export class TasksComponent implements OnInit {
   obtenerTareas() {
     this.servicioTareas.obtenerTareas().subscribe((data) => {
       this.tareas = data;
+      this.tamanoDataTareas = this.tareas.length;
     });
+  }
+
+  crearTarea() {
+    this.tareaCreada = true;
+    this.servicioTareas.crearTarea(this.tareaFormulario).subscribe();
   }
 
   guardarTarea(formulario: NgForm) {
@@ -50,30 +56,26 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  crearTarea() {
-    this.tareaCreada = true;
-    this.servicioTareas.crearTarea(this.tareaFormulario).subscribe();
-  }
-
-  actualizarTarea(informacion: Tarea) {
-    this.servicioTareas.actualizarTarea(informacion).subscribe();
-  }
-
-  mostrarFormulario(tarea: Tarea) {
-    if (tarea.title) {
-      this.tareaFormulario.title = tarea.title;
-      this.tareaFormulario.state = tarea.state;
-      this.tareaFormulario.id = tarea.id;
-    }
-  }
-
   actualizarCheck(event: any, tarea: Tarea) {
-    const nuevaInformacion = {
+    let nuevaInformacion = {
       title: tarea.title,
       state: event.checked,
       id: tarea.id,
     };
     this.actualizarTarea(nuevaInformacion);
+  }
+
+  actualizarTarea(informacion: Tarea) {
+    this.tareaActualizada = true;
+    this.servicioTareas.actualizarTarea(informacion).subscribe();
+  }
+
+  datosElementoAmodificar(tarea: Tarea) {
+    if (tarea.title) {
+      this.tareaFormulario.title = tarea.title;
+      this.tareaFormulario.state = tarea.state;
+      this.tareaFormulario.id = tarea.id;
+    }
   }
 
   eliminarTarea(id: string) {
@@ -82,28 +84,7 @@ export class TasksComponent implements OnInit {
 
   limpiarFormulario() {
     this.tareaCreada = false;
-    this.tareaFormulario = {
-      title: '',
-      state: '',
-    };
-  }
-
-  cambiarPagina(direccion: any) {
-    if (direccion === 'anterior') this.paginaAnterior();
-    if (direccion === 'siguiente') this.paginaSiguiente();
-  }
-
-  paginaSiguiente() {
-    if (this.paginacion < this.tareas.length) {
-      this.paginacion += 5;
-      this.pagina += 1;
-    }
-  }
-
-  paginaAnterior() {
-    if (this.paginacion > 0) {
-      this.paginacion -= 5;
-      this.pagina -= 1;
-    }
+    this.tareaActualizada = false;
+    this.tareaFormulario = { title: '', state: '' };
   }
 }
