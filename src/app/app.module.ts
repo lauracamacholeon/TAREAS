@@ -3,15 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { TasksComponent } from './pages/tasks/tasks.component';
-import { FloatButtonComponent } from './shared/float-button/float-button.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { SearchPipe } from './pipes/search.pipe';
-import { PaginationPipe } from './pipes/pagination.pipe';
-import { AlertComponent } from './components/alert/alert.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
+
+import { TasksComponent } from './pages/tasks/tasks.component';
+
+
+// mis modulos
+import { ComponentsModule } from './components/components.module';
+import { PipesModule } from './pipes/pipes.module';
+import { SharedModule } from './shared/shared.module';
 
 // modulos
 
@@ -19,21 +21,18 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    TasksComponent,
-    FloatButtonComponent,
-    SearchPipe,
-    PaginationPipe,
-    AlertComponent,
-    PaginationComponent,
-    
+    TasksComponent,  
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    // mis modulos 
+    ComponentsModule,
+    PipesModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
