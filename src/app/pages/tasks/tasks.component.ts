@@ -14,18 +14,16 @@ export class TasksComponent implements OnInit {
   tamanoDataTareas: number = 0;
   busqueda = '';
   pagina: number = 1;
+  tareaFormulario: Tarea = { title: '', state: '' };
+  mensajeError = '';
 
   // recibir numero por output
   paginacion = 0;
-  mensaje = 'hola';
 
   // Banderas
   tareaCreada = false;
   tareaActualizada = false;
   tareaEliminada = false;
-
-  tareaFormulario: Tarea = { title: '', state: '' };
-  mensajeError = '';
 
   constructor(private servicioTareas: TasksService) {}
 
@@ -99,7 +97,7 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  eliminarTarea(id: string) {
+  confirmacionEliminar(id: string) {
     Swal.fire({
       icon: 'warning',
       text: '¿Está seguro que desea eliminar el elemento?',
@@ -111,16 +109,19 @@ export class TasksComponent implements OnInit {
       cancelButtonText: 'Cancelar',
       // si la respuesta es OK, se eliminará el elemento (evitar accidentes)
     }).then((resp) => {
-      if (resp.value) {
-        this.servicioTareas.eliminarTarea(id).subscribe(
-          resp => this.tareaEliminada = true,
-          error => {
-            this.mensajeError = error;
-            this.alertaError();
-          }
-        );
-      }
+      if (resp.value) this.eliminarTarea(id);
+      else return;
     });
+  }
+
+  eliminarTarea(id: string) {
+    this.servicioTareas.eliminarTarea(id).subscribe(
+      (resp) => (this.tareaEliminada = true),
+      (error) => {
+        this.mensajeError = error;
+        this.alertaError();
+      }
+    );
   }
 
   limpiarFormulario() {
