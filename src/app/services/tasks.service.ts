@@ -1,19 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { TareaRespuesta, Tarea } from '../interfaces/tarea-respuesta';
+import { environment } from 'src/environments/environment';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TasksService {
+  private apiUrl = environment.apiUrl;
+  private _refrescar$ = new Subject<void>();
+
   constructor(private http: HttpClient) {
     console.log('servicio inyectado');
   }
 
-  obtenerTareas() 
-  {
-    return this.http.get<TareaRespuesta[]>('https://608adc0d737e470017b7410f.mockapi.io/api/v1/todos')
+  get refrescar$() {
+    return this._refrescar$;
+  }
 
+  obtenerTareas() {
+    return this.http.get<TareaRespuesta[]>(`${this.apiUrl}`);
+  }
+
+  crearTarea(tarea: Tarea) {
+    return this.http.post(`${this.apiUrl}`, tarea).pipe(
+      tap(() => {
+        this._refrescar$.next();
+      })
+    );
   }
 }

@@ -1,19 +1,30 @@
+<div *ngIf="tareaCreada" >
+  <app-alert (alertaCerrada)="limpiarFormulario()" [color]="'alert-success'"></app-alert>
+</div>
+
+
+
 <div class="crear-tarea">
 
   <div class="container container-fluid crear-tarea__container">
     <h2 class="bold"><i class="fas fa-plus"></i> Nueva tarea</h2>
     <h3 class="mt-3"> Titulo </h3>
-    <form action="" class="formulario">
-      <input type="text" class="input-titulo" placeholder="Ingrese titulo...">
+
+    <form class="formulario" #formulario="ngForm" (ngSubmit)="guardarTarea(formulario)">
+      <input required [(ngModel)]="tareaFormulario.title" name="title" #title="ngModel" type="text" class="input-titulo"
+        placeholder="Ingrese titulo...">
       <div class="form-check mt-2">
         <label class="form-check-label" for="flexCheckDefault">
           Tarea completada
         </label>
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <input [(ngModel)]="tareaFormulario.state" name="state" #state="ngModel" class="form-check-input"
+          type="checkbox" value="" id="flexCheckDefault">
       </div>
-      <button class="btn btn-light medium"><i class="fas fa-plus "></i> GUARDAR TAREA</button>
+      <button type="submit" class="btn btn-light medium"><i class="fas fa-plus "></i> GUARDAR TAREA</button>
 
     </form>
+
+
 
   </div>
 
@@ -44,16 +55,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let tarea of tareas | search:busqueda | pagination:paginacion">
+              <tr *ngFor="let tarea of tareas | pagination:paginacion | search:busqueda">
                 <th>{{ tarea.id }}</th>
-                <td> {{ tarea.title }} Mark</td>
+                <td [ngClass]="{'tareaRealizada': tarea.state}"> {{ tarea.title }} Mark</td>
                 <td>
                   <input [(ngModel)]="tarea.state" class="form-check-input" type="checkbox" value=""
                     id="flexCheckDefault">
                 </td>
                 <td class="text-danger"><i class="fas fa-trash-alt"></i></td>
               </tr>
-
             </tbody>
           </table>
         </div>
@@ -69,7 +79,7 @@
   <div class="wrapper">
     <div class="pagination">
       <a class="prev" (click)="paginaAnterior()"><span><i class="fas fa-angle-left"></i></span></a>
-      <button  class="page">{{ pagina }}</button>
+      <button class="page">{{ pagina }}</button>
       <a class="next" (click)="paginaSiguiente()"><i class="fas fa-angle-right"></i></a>
     </div>
   </div>

@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './pipes/search.pipe';
 import { PaginationPipe } from './pipes/pagination.pipe';
-import { ButtonsPipe } from './pipes/buttons.pipe';
+import { AlertComponent } from './components/alert/alert.component';
 
 // modulos
 
@@ -23,7 +23,8 @@ import { ButtonsPipe } from './pipes/buttons.pipe';
     FloatButtonComponent,
     SearchPipe,
     PaginationPipe,
-    ButtonsPipe,
+    AlertComponent,
+    
    
   ],
   imports: [

@@ -12,12 +12,18 @@
   color: #fff;
 }
 
+.tareaRealizada{
+  text-decoration: line-through;
+}
+
+
 .input-titulo {
   /* width: 50%; */
   background-color: transparent;
   border: 0;
   border-bottom: 1px solid #fff;
   outline: none;
+  color: #fff;
 }
 
 .btn {
@@ -26,10 +32,9 @@
   border-radius: 50px;
   font-size: 14px;
   letter-spacing: 1.25px;
-  
 }
 
-a{
+a {
   cursor: pointer;
 }
 
@@ -61,12 +66,18 @@ a{
 .card {
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 7px;
+  min-height: 450px;
 }
 
 /* tabla */
 th {
   color: #11766a;
   
+}
+td{
+  color: #707070;
+  font-family: 'Helvetica';
+  font-size: 18px;
 }
 td,
 th {
@@ -87,7 +98,7 @@ tr {
 }
 
 .pagination .page {
-  width: 30px;
+  width: 40px;
   box-shadow: 0px 3px 6px #00000029;
   height: 41px;
   border: 1px solid hsl(0, 0%, 85%);
@@ -110,8 +121,7 @@ tr {
 
 /* checkbox */
 
-
-input[type="checkbox"]{
+input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   height: 20px;
@@ -119,14 +129,12 @@ input[type="checkbox"]{
   background-color: #d0d0d0;
   border-radius: 3px;
   cursor: pointer;
- 
 }
 
-input[type="checkbox"]:checked{
+input[type="checkbox"]:checked {
   background-color: #11766a;
   border-color: #11766a;
 }
-
 
 @media (min-width: 780px) {
   .formulario {
@@ -148,5 +156,8 @@ input[type="checkbox"]:checked{
   }
   .busqueda__caja {
     width: 479px;
+  }
+  .card {
+    min-height: 350px;
   }
 }
