@@ -10,6 +10,6 @@ export interface TareaRespuesta {
 
 export interface Tarea{
     title:        null | string;
-    id:           string;
+    id?:           string;
     state?:      boolean | null | string;
 }

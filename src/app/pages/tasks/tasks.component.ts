@@ -17,7 +17,7 @@ export class TasksComponent implements OnInit {
   // Banderas
   tareaCreada = false;
 
-  tareaFormulario = {
+  tareaFormulario: Tarea = {
     title: '',
     state: '',
   };
@@ -26,6 +26,7 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerTareas();
+
     // visualizacion en tiempo real
     this.servicioTareas.refrescar$.subscribe(() => {
       this.obtenerTareas();
@@ -42,9 +43,42 @@ export class TasksComponent implements OnInit {
     if (formulario.invalid) {
       return;
     }
-    this.tareaCreada = true;
-    // this.servicioTareas.crearTarea(formulario.value).subscribe();
+    if (!this.tareaFormulario.id) {
+      this.crearTarea();
+    } else {
+      this.actualizarTarea(this.tareaFormulario);
+    }
+
   }
+
+  crearTarea(){
+    this.tareaCreada = true;
+    this.servicioTareas.crearTarea(this.tareaFormulario).subscribe();
+  }
+
+  actualizarTarea(informacion:Tarea){
+    this.servicioTareas.actualizarTarea(informacion).subscribe();
+  }
+
+  mostrarFormulario(tarea: Tarea) {
+    if (tarea.title) {
+      this.tareaFormulario.title = tarea.title;
+      this.tareaFormulario.state = tarea.state;
+      this.tareaFormulario.id = tarea.id;
+    }
+  }
+
+
+  actualizarCheck(event:any, tarea:Tarea){
+    const nuevaInformacion = {
+      title: tarea.title,
+      state: event.checked,
+      id: tarea.id
+    }
+    this.actualizarTarea(nuevaInformacion);
+  }
+
+
 
   limpiarFormulario() {
     this.tareaCreada = false;
@@ -52,8 +86,11 @@ export class TasksComponent implements OnInit {
       title: '',
       state: '',
     };
+  }
 
-    // this.tareaCreada =fas
+  cambiarPagina(direccion: any) {
+    if (direccion === 'anterior') this.paginaAnterior();
+    if (direccion === 'siguiente') this.paginaSiguiente();
   }
 
   paginaSiguiente() {

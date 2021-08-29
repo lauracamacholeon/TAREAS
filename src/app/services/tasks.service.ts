@@ -31,4 +31,16 @@ export class TasksService {
       })
     );
   }
+
+  actualizarTarea(informacion: any) {
+    const id = informacion.id;
+    const nuevaInformacion = { ...informacion };
+    delete nuevaInformacion.id;
+    // console.log(nuevaInformacion);
+    return this.http.put(`${this.apiUrl}/${id}`, informacion).pipe(
+      tap(() => {
+        this._refrescar$.next();
+      })
+    );
+  }
 }

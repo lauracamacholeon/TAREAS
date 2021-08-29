@@ -3,7 +3,6 @@
 </div>
 
 
-
 <div class="crear-tarea">
 
   <div class="container container-fluid crear-tarea__container">
@@ -23,9 +22,6 @@
       <button type="submit" class="btn btn-light medium"><i class="fas fa-plus "></i> GUARDAR TAREA</button>
 
     </form>
-
-
-
   </div>
 
 </div>
@@ -56,10 +52,10 @@
             </thead>
             <tbody>
               <tr *ngFor="let tarea of tareas | pagination:paginacion | search:busqueda">
-                <th>{{ tarea.id }}</th>
-                <td [ngClass]="{'tareaRealizada': tarea.state}"> {{ tarea.title }} Mark</td>
+                <th (click)="mostrarFormulario(tarea)" class="editar-tarea">{{ tarea.id }}</th>
+                <td (click)="mostrarFormulario(tarea)" class="editar-tarea" [ngClass]="{'tareaRealizada': tarea.state}"> {{ tarea.title }} Mark</td>
                 <td>
-                  <input [(ngModel)]="tarea.state" class="form-check-input" type="checkbox" value=""
+                  <input  (click)="actualizarCheck($event.target,tarea)"  [ngModel]="tarea.state" readonly  class="form-check-input" type="checkbox" value=""
                     id="flexCheckDefault">
                 </td>
                 <td class="text-danger"><i class="fas fa-trash-alt"></i></td>
@@ -75,12 +71,5 @@
 </div>
 
 
-<div class="paginacion mt-5 mb-5">
-  <div class="wrapper">
-    <div class="pagination">
-      <a class="prev" (click)="paginaAnterior()"><span><i class="fas fa-angle-left"></i></span></a>
-      <button class="page">{{ pagina }}</button>
-      <a class="next" (click)="paginaSiguiente()"><i class="fas fa-angle-right"></i></a>
-    </div>
-  </div>
-</div>
+<app-pagination [pagina]="pagina" (direccionPagina)="cambiarPagina($event)"></app-pagination>
+

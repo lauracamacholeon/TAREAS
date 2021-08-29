@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './pipes/search.pipe';
 import { PaginationPipe } from './pipes/pagination.pipe';
 import { AlertComponent } from './components/alert/alert.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 // modulos
 
@@ -24,6 +25,7 @@ import { AlertComponent } from './components/alert/alert.component';
     SearchPipe,
     PaginationPipe,
     AlertComponent,
+    PaginationComponent,
     
    
   ],
