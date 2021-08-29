@@ -58,7 +58,7 @@
                   <input  (click)="actualizarCheck($event.target,tarea)"  [ngModel]="tarea.state" readonly  class="form-check-input" type="checkbox" value=""
                     id="flexCheckDefault">
                 </td>
-                <td class="text-danger"><i class="fas fa-trash-alt"></i></td>
+                <td (click)="eliminarTarea(tarea.id)" class="text-danger editar-tarea"><i class="fas fa-trash-alt"></i></td>
               </tr>
             </tbody>
           </table>

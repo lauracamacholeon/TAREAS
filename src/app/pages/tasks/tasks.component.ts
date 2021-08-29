@@ -48,15 +48,14 @@ export class TasksComponent implements OnInit {
     } else {
       this.actualizarTarea(this.tareaFormulario);
     }
-
   }
 
-  crearTarea(){
+  crearTarea() {
     this.tareaCreada = true;
     this.servicioTareas.crearTarea(this.tareaFormulario).subscribe();
   }
 
-  actualizarTarea(informacion:Tarea){
+  actualizarTarea(informacion: Tarea) {
     this.servicioTareas.actualizarTarea(informacion).subscribe();
   }
 
@@ -68,17 +67,18 @@ export class TasksComponent implements OnInit {
     }
   }
 
-
-  actualizarCheck(event:any, tarea:Tarea){
+  actualizarCheck(event: any, tarea: Tarea) {
     const nuevaInformacion = {
       title: tarea.title,
       state: event.checked,
-      id: tarea.id
-    }
+      id: tarea.id,
+    };
     this.actualizarTarea(nuevaInformacion);
   }
 
-
+  eliminarTarea(id: string) {
+    this.servicioTareas.eliminarTarea(id).subscribe();
+  }
 
   limpiarFormulario() {
     this.tareaCreada = false;

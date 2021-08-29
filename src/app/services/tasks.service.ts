@@ -43,4 +43,12 @@ export class TasksService {
       })
     );
   }
+
+  eliminarTarea(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`).pipe(
+      tap(() => {
+        this._refrescar$.next();
+      })
+    );
+  }
 }
