@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TasksService } from '../../services/tasks.service';
 import { Tarea, TareaRespuesta } from '../../interfaces/tarea-respuesta';
 import { NgForm } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tasks',
@@ -21,7 +22,7 @@ export class TasksComponent implements OnInit {
   tareaCreada = false;
   tareaActualizada = false;
 
-  tareaFormulario: Tarea = {  title: '',  state: '' };
+  tareaFormulario: Tarea = { title: '', state: '' };
 
   constructor(private servicioTareas: TasksService) {}
 
@@ -46,6 +47,7 @@ export class TasksComponent implements OnInit {
   }
 
   guardarTarea(formulario: NgForm) {
+    // evitar que se envie informacion vacia
     if (formulario.invalid) {
       return;
     }
@@ -79,7 +81,21 @@ export class TasksComponent implements OnInit {
   }
 
   eliminarTarea(id: string) {
-    this.servicioTareas.eliminarTarea(id).subscribe();
+    Swal.fire({
+      icon: 'warning',
+      text: '¿Está seguro que desea eliminar el elemento?',
+      showConfirmButton: true,
+      showCancelButton: true,
+      cancelButtonColor: '#d9534f',
+      confirmButtonColor: '#11806A',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+      // si la respuesta es OK, se eliminará el elemento (evitar accidentes)
+    }).then((resp) => {
+      if (resp.value) {
+        this.servicioTareas.eliminarTarea(id).subscribe();
+      }
+    });
   }
 
   limpiarFormulario() {

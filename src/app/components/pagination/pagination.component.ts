@@ -8,7 +8,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 export class PaginationComponent implements OnInit {
 
   constructor() { }
-  // no es necesario
+ 
   pagina:number=1;
   paginacion = 0;
   @Output() mostrarPaginas:EventEmitter<number> = new EventEmitter();
