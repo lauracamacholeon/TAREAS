@@ -16,11 +16,13 @@
   text-decoration: line-through;
 }
 
+
 .input-titulo {
   background-color: transparent;
   border: 0;
   border-bottom: 1px solid #fff;
   outline: none;
+  width: 100%;
 }
 
 .btn {

@@ -22,7 +22,6 @@ export class TasksService {
   }
 
 
-
   obtenerTareas() {
     return this.http.get<TareaRespuesta[]>(`${this.apiUrl}`).pipe( catchError( this.errorHandler ) )
   }

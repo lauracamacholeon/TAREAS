@@ -50,7 +50,11 @@ export class TasksComponent implements OnInit {
 
   crearTarea() {
     this.servicioTareas.crearTarea(this.tareaFormulario).subscribe(
-      (resp) => (this.tareaCreada = true),
+      (resp) => {
+        this.tareaCreada = true,
+        this.tareaEliminada = false;
+        this.tareaActualizada = false;
+      },
       (error) => {
         this.mensajeError = error;
         this.alertaError();
@@ -81,7 +85,11 @@ export class TasksComponent implements OnInit {
 
   actualizarTarea(informacion: Tarea) {
     this.servicioTareas.actualizarTarea(informacion).subscribe(
-      (data) => (this.tareaActualizada = true),
+      (data) => {
+        this.tareaActualizada = true;
+        this.tareaCreada = false;
+        this.tareaEliminada = false;
+      },
       (error) => {
         this.mensajeError = error;
         this.alertaError();
@@ -116,7 +124,11 @@ export class TasksComponent implements OnInit {
 
   eliminarTarea(id: string) {
     this.servicioTareas.eliminarTarea(id).subscribe(
-      (resp) => (this.tareaEliminada = true),
+      (resp) => {
+        this.tareaEliminada = true;
+        this.tareaCreada = false;
+        this.tareaActualizada = false;
+      },
       (error) => {
         this.mensajeError = error;
         this.alertaError();
