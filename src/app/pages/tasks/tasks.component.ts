@@ -15,7 +15,7 @@ export class TasksComponent implements OnInit {
   busqueda = '';
   pagina: number = 1;
   tareaFormulario: Tarea = { title: '', state: '' };
-  mensajeError = '';
+ 
 
   // recibir numero por output
   paginacion = 0;
@@ -41,24 +41,19 @@ export class TasksComponent implements OnInit {
         this.tareas = data;
         this.tamanoDataTareas = this.tareas.length;
       },
-      (error) => {
-        this.mensajeError = error;
-        this.alertaError();
-      }
+      (error) => this.alertaError()
     );
   }
 
   crearTarea() {
     this.servicioTareas.crearTarea(this.tareaFormulario).subscribe(
       (resp) => {
-        this.tareaCreada = true,
-        this.tareaEliminada = false;
+        this.tareaCreada = true;
         this.tareaActualizada = false;
+        this.tareaEliminada = false;
+      
       },
-      (error) => {
-        this.mensajeError = error;
-        this.alertaError();
-      }
+      (error) => this.alertaError()
     );
   }
 
@@ -90,10 +85,7 @@ export class TasksComponent implements OnInit {
         this.tareaCreada = false;
         this.tareaEliminada = false;
       },
-      (error) => {
-        this.mensajeError = error;
-        this.alertaError();
-      }
+      (error) => this.alertaError()
     );
   }
 
@@ -128,11 +120,9 @@ export class TasksComponent implements OnInit {
         this.tareaEliminada = true;
         this.tareaCreada = false;
         this.tareaActualizada = false;
+        
       },
-      (error) => {
-        this.mensajeError = error;
-        this.alertaError();
-      }
+      (error) => this.alertaError()
     );
   }
 
