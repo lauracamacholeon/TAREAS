@@ -17,7 +17,7 @@
     <h2 class="bold"><i class="fas fa-plus"></i> Nueva tarea</h2>
     <h3 class="mt-3"> Titulo </h3>
 
-    <form class="formulario" #formulario="ngForm" (ngSubmit)="guardarTarea(formulario)">
+    <form autocomplete="off" class="formulario" #formulario="ngForm" (ngSubmit)="guardarTarea(formulario)">
       <input required [(ngModel)]="tareaFormulario.title" name="title" #title="ngModel" type="text" class="input-titulo"
         placeholder="Ingrese titulo...">
       <div class="form-check mt-2">
