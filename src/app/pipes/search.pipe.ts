@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Tarea } from '../interfaces/tarea-respuesta';
 
 @Pipe({
   name: 'search'
 })
 export class SearchPipe implements PipeTransform {
 
-  transform(value: any, arg: any): any {
+  transform(value: Tarea[], arg: string): Tarea[] {
     const argumento = arg.toLowerCase();
     const resultados = [];
     for (const valores of value) {
